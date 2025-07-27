@@ -15,8 +15,14 @@ export async function initializeKnowledgeBase(forceReload: boolean = false): Pro
     // Check if knowledge base already exists and we're not forcing reload
     if (knowledgeBaseId && !forceReload) return;
 
-    // Read the knowledge base file
-    const knowledgeBasePath = path.join(__dirname, '../knowledge-base.txt');
+    // Read the knowledge base file - handle both dev and production paths
+    let knowledgeBasePath = path.join(__dirname, '../knowledge-base.txt');
+    
+    // In production build, file is in same directory as bundled code
+    if (process.env.NODE_ENV === 'production') {
+      knowledgeBasePath = path.join(__dirname, 'knowledge-base.txt');
+    }
+    
     const content = await fs.readFile(knowledgeBasePath, 'utf-8');
     
     // Process the knowledge base
