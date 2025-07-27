@@ -36,6 +36,11 @@ try {
     }
   );
 
+  console.log('📁 Copying knowledge base...');
+  
+  // Copy knowledge base file to dist for production
+  execSync('cp server/knowledge-base.txt dist/', { stdio: 'inherit' });
+
   console.log('🔧 Building backend...');
   
   // Build backend
