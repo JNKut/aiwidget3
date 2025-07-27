@@ -1,7 +1,8 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    "builder": "NIXPACKS"
+    "builder": "NIXPACKS",
+    "buildCommand": "npm install && npx vite build --config vite.simple.config.ts --mode production && npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
   },
   "deploy": {
     "startCommand": "npm run start",
