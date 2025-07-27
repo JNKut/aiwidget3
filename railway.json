@@ -2,11 +2,11 @@
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "npm ci && npm run build"
+    "buildCommand": "npm install --no-cache && cd client && NODE_ENV=production REPL_ID= npx vite build --outDir ../dist/public --mode production --emptyOutDir && cd .. && npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist"
   },
   "deploy": {
     "startCommand": "npm run start",
-    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyType": "ON_FAILURE", 
     "restartPolicyMaxRetries": 10
   }
 }
